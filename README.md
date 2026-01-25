@@ -1,97 +1,127 @@
-# 02_artist_revenue_forecasting
-Artist revenue forecasting using historical streaming data to produce clear, explainable royalty income projections.
+# 📈 Artist Revenue Forecasting Under Uncertainty
+## Project Overview
 
-This project focuses on forecasting an artist’s future royalty income using historical streaming data.
+This project explores how historical streaming data can be used to estimate future royalty revenue for a music artist, with a focus on uncertainty, volatility, and realistic planning rather than precise prediction.
 
-Rather than relying on complex or black-box machine learning models, the analysis prioritises **clear, interpretable forecasting methods** that reflect how revenue projections are commonly used in the music industry. The goal is to produce forecasts that artists, managers, or label teams could realistically understand and apply when planning releases, tours, or budgets.
+Rather than applying complex forecasting models by default, the analysis compares simple, interpretable approaches to assess which methods are most appropriate given the underlying data patterns. The project mirrors real-world scenarios where artists, managers, or labels need defensible revenue expectations rather than exact forecasts.
 
-The project builds a clean monthly revenue time series from streaming data and explores multiple forecasting approaches, including baseline, rolling average, and trend-based projections. Emphasis is placed on transparency, assumptions, and limitations, mirroring real-world decision-support analytics rather than purely academic modelling.
+## Key Questions
 
-**Note:** The dataset used in this project is simulated but designed to reflect real-world music royalty reporting structures, including volatility, platform differences, and reporting noise.
+The analysis was guided by the following questions:
 
-This analysis is framed from the perspective of an artist or management team seeking realistic expectations around future income rather than precise financial guarantees.
+ 1. What does historical monthly royalty revenue look like for an individual artist?
 
----
+ 2. Is the revenue pattern stable, trending, or highly volatile?
 
-## Project Objective
+ 3. How do different simple forecasting approaches compare under volatile conditions?
 
-The goal of this project is to answer a practical business question:
+ 4. Which forecasting method provides the most practical and defensible estimate for planning?
 
-**“Based on past streaming performance, what can an artist reasonably expect to earn over the next few months?”**
+## Dataset
 
-Rather than attempting to produce a single ‘perfect’ prediction, the project compares multiple simple forecasting approaches to understand how different assumptions affect revenue expectations.
+The dataset is simulated to reflect realistic music streaming and royalty reporting structures and includes:
 
----
+ - Monthly streaming usage across platforms and territories
 
-## Data Overview
+ - Royalty rates applied per stream
 
-The analysis uses a simulated dataset representing:
-- Streaming usage across **100 fictional artists**
-- Multiple platforms and territories
-- Monthly reporting over multiple years
+ - Artist-level aggregation of expected revenue
 
-For forecasting, the analysis focuses on a **single artist (Phoenix Santos)**, while retaining the wider catalogue to provide realistic context.
-
----
+A simulated dataset was used to allow full control over volatility, noise, and reporting behaviour while avoiding proprietary or sensitive financial data.
 
 ## Methodology
 
-### 1. Revenue Time Series Construction
+The analysis follows a structured, decision-focused workflow:
 
-Reported streaming usage for the selected artist is combined with royalty rate data to calculate **expected monthly revenue**. Negative stream values are clipped to zero to avoid unrealistic revenue calculations.
+ 1. Revenue construction
 
-Revenue is then aggregated to a monthly time series, forming the foundation for all forecasting methods.
+     - Combined streaming usage with royalty rates
 
----
+     - Cleaned invalid stream values
 
-### 2. Catalogue Context
+     - Calculated expected revenue at the record level
 
-Before forecasting, the artist’s total streams are compared against the wider catalogue to understand their relative position. This mirrors real-world workflows where forecasts are interpreted differently for head, mid-tier, or long-tail artists.
+ 2. Time series aggregation
 
----
+     - Aggregated revenue to monthly totals
 
-### 3. Forecasting Approaches
+     - Created a continuous time series suitable for forecasting
 
-Three simple and interpretable forecasting methods are applied:
+ 3. Pattern inspection
 
-#### Naive Baseline  
-Assumes the next period will match the most recent observed month.  
-This method serves as a benchmark but is highly sensitive to short-term volatility.
+     - Visualised historical revenue to assess volatility and trend
 
-#### Rolling Average  
-Uses a short rolling window to smooth month-to-month fluctuations.  
-This approach provides a more stable estimate and is often preferred for budgeting and planning.
+     - Identified spiky, irregular behaviour rather than smooth growth
 
-#### Trend Projection  
-Fits a simple linear trend to historical data and projects it forward.  
-With volatile data, this method can overreact to noise and is therefore treated cautiously.
+ 4. Forecast comparison
 
-Forecasts are only shown **after the final observed data point**, reflecting real-world uncertainty rather than retroactively fitting history.
+     - Compared three simple approaches:
 
----
+         - Naive (last observed value)
 
-## Key Findings and Interpretation
+         - Rolling average
 
-Phoenix Santos’ monthly revenue exhibits **significant volatility** with no strong long-term upward or downward trend.
+         - Linear trend
 
-- The **naive forecast** reacts strongly to the most recent month and can be misleading when revenue spikes or dips.
-- The **trend-based forecast** shows limited reliability due to the absence of a clear directional pattern.
-- The **rolling average forecast** provides the most reasonable planning estimate, as it smooths volatility without assuming sustained growth or decline.
+ 5. Forecast interpretation
 
-This comparison highlights the importance of matching forecasting methods to data behaviour rather than defaulting to more complex models.
+     - Assessed realism and robustness rather than statistical accuracy
 
----
+Visualisations were used to support interpretation and decision-making rather than to optimise predictive performance.
 
-## Limitations and Assumptions
+## Key Findings
+### 1️⃣ Revenue Is Highly Volatile
 
-- The dataset is simulated and does not represent actual royalty statements.
-- Forecasts do not account for future releases, marketing campaigns, or external shocks.
-- Results are intended to support **planning and expectation-setting**, not precise financial forecasting.
+Historical monthly revenue for the selected artist exhibits significant spikes and drops, with no clear long-term upward or downward trend.
 
----
+This volatility is typical of real-world streaming income, where playlist placement, releases, and reporting cycles can cause abrupt changes.
+
+### 2️⃣ Naive Forecasts Are Overly Reactive
+
+Naive forecasts closely track the most recent observation, making them highly sensitive to short-term spikes or dips.
+
+While simple, this approach risks overestimating or underestimating future income when recent months are atypical.
+
+### 3️⃣ Trend Models Are Unstable in Noisy Data
+
+Linear trend models attempt to impose structure on a dataset that does not exhibit a clear trend.
+
+In this context, trend-based forecasts are highly sensitive to noise and may imply growth or decline that is not supported by the underlying pattern.
+
+### 4️⃣ Rolling Averages Provide the Most Defensible Estimate
+
+Rolling average forecasts smooth short-term volatility while remaining grounded in recent performance.
+
+For spiky, trendless revenue data, this approach provides the most realistic and interpretable estimate for budgeting and planning purposes.
+
+## Interpretation
+
+The analysis demonstrates that model choice should be driven by data behaviour, not model sophistication.
+
+In the absence of a clear trend, simpler smoothing-based approaches outperform more complex or assumption-heavy methods in terms of practical usefulness. For artists with volatile income streams, stability and transparency are more valuable than precision.
+
+## Limitations
+ - The dataset is simulated and does not represent actual artist earnings
+ - External drivers (marketing, releases, playlists) are not modelled
+
+ - No formal forecast accuracy metrics are calculated
+
+The analysis prioritises decision relevance over predictive optimisation.
+
+## Skills Demonstrated
+
+ - Feature engineering and revenue construction
+
+ - Time series aggregation and visualisation
+
+ - Forecast comparison under uncertainty
+
+ - Analytical judgement in model selection
+
+ - Clear communication of limitations and trade-offs
 
 ## Conclusion
 
-This project demonstrates how simple, transparent forecasting methods can provide meaningful insights when applied thoughtfully. In cases of volatile artist revenue, stable approaches such as rolling averages often outperform more reactive or assumption-heavy models.
+This project shows how simple, well-reasoned forecasting approaches can provide useful financial guidance in environments characterised by volatility and uncertainty.
 
-The analysis emphasises **interpretability, realism, and judgement**, mirroring how forecasting is used in real music industry and data-driven decision-making contexts.
+By focusing on interpretability and realism rather than complexity, the analysis mirrors how forecasting is often applied in real-world music industry and business contexts.
